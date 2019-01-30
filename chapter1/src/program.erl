@@ -1,4 +1,9 @@
--module(chapter1_program).
+%% @author Zhenghua Lyu <kainwen@gmail.com>
+%%   [http://kainwen.com/]
+%%
+%% @doc This module contains Chapter 1's programming exercise.
+
+-module(program).
 
 -include("type_defs.hrl").
 
