@@ -1,6 +1,6 @@
--type id() :: string().
+-type id() :: atom().
 
--type binop() :: plus | minus | times | 'div'.
+-type binop() :: '+' | '-' | '*' | '/'.
 
 -type stm() :: {compound_stm, stm(), stm()}
              | {assign_stm, id(), exp()}
@@ -12,3 +12,10 @@
              | {eseq_exp, stm(), exp()}.
 
 -type unit() :: nil.
+
+-type sym() :: ';' | ':=' | ',' | '+' | '-' | '*' | '/' | '(' | ')' | ','.
+-type token() :: {symbol, sym()}
+               | {keyword, print}
+               | {id, atom()}
+               | {int, integer()}.
+-type tokens() :: [token()].
