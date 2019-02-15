@@ -11,7 +11,9 @@
              | {op_exp, exp(), binop(), exp()}
              | {eseq_exp, stm(), exp()}.
 
--type unit() :: nil.
+-type value() :: integer().
+-type table() :: {atom(), value()}.
+-type stdout() :: [value()].
 
 -type sym() :: ';' | ':=' | ',' | '+' | '-' | '*' | '/' | '(' | ')' | ','.
 -type token() :: {symbol, sym()}

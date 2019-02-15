@@ -2,7 +2,13 @@
 
 -include("type_defs.hrl").
 
--export([parse_stm/1]).
+-export([scan_and_parse/1]).
+
+-spec scan_and_parse(string()) -> stm().
+scan_and_parse(Code) ->
+    {ok, Toks, _} = program4x_tok:string(Code),
+    {Stm, []} = parse_stm(Toks),
+    Stm.
 
 -spec parse_stm(tokens()) -> {stm(), tokens()}.
 parse_stm(Toks=[{id, _}|_]) ->
@@ -37,16 +43,11 @@ parse_multi(Toks, Fun, Delim) ->
 parse_multi(Toks, Fun, Delim, Acc) ->
     try Fun(Toks) of
         {A, R} ->
-            case Delim of
-                nil ->
-                    parse_multi(R, Fun, Delim, [A|Acc]);
+            case R of
+                [Delim|R1] ->
+                    parse_multi(R1, Fun, Delim, [A|Acc]);
                 _ ->
-                    case R of
-                        [Delim|R1] ->
-                            parse_multi(R1, Fun, Delim, [A|Acc]);
-                        _ ->
-                            {lists:reverse([A|Acc]), R}
-                    end
+                    {lists:reverse([A|Acc]), R}
             end
     catch
         _:_ ->

@@ -1,4 +1,4 @@
--module(tiger_parse_test).
+-module(tiger_parse_tests).
 
 -include_lib("eunit/include/eunit.hrl").
 
